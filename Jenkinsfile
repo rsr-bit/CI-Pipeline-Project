@@ -2,14 +2,9 @@ pipeline {
 
     agent any
 
-    tools {
-        jdk 'JDK'
-    }
-
     environment {
         PROJECT_NAME = "Enterprise-CI-System"
         ENVIRONMENT = "Testing"
-        BUILD_STATUS = "STARTED"
     }
 
     stages {
@@ -29,7 +24,6 @@ pipeline {
             steps {
                 echo 'Connecting to GitHub Repository...'
                 echo 'Fetching latest source code...'
-                echo 'Repository synchronization completed...'
             }
         }
 
@@ -37,15 +31,13 @@ pipeline {
             steps {
                 echo 'Checking project dependencies...'
                 echo 'Resolving external libraries...'
-                echo 'Dependency verification completed...'
             }
         }
 
         stage('Compile Application') {
             steps {
-                echo 'Compiling Java source files...'
-                echo 'Generating binary artifacts...'
-                echo 'Compilation completed successfully...'
+                echo 'Compiling source files...'
+                echo 'Generating build artifacts...'
             }
         }
 
@@ -53,7 +45,6 @@ pipeline {
             steps {
                 echo 'Running static code analysis...'
                 echo 'Checking coding standards...'
-                echo 'Code quality verification completed...'
             }
         }
 
@@ -61,55 +52,41 @@ pipeline {
             steps {
                 echo 'Executing unit test cases...'
                 echo 'Generating test reports...'
-                echo 'Unit testing completed successfully...'
             }
         }
 
         stage('Integration Testing') {
             steps {
                 echo 'Running integration testing...'
-                echo 'Validating module communication...'
-                echo 'Integration testing completed...'
+                echo 'Validating module interactions...'
             }
         }
 
-        stage('Security and Vulnerability Scan') {
+        stage('Security Scan') {
             steps {
-                echo 'Performing security analysis...'
-                echo 'Scanning for vulnerabilities...'
+                echo 'Performing security vulnerability scan...'
                 echo 'Security validation completed...'
             }
         }
 
-        stage('Package Build Artifacts') {
+        stage('Package Application') {
             steps {
-                echo 'Packaging application files...'
-                echo 'Creating deployment artifacts...'
-                echo 'Artifact packaging completed...'
+                echo 'Packaging deployment artifacts...'
+                echo 'Preparing release build...'
             }
         }
 
-        stage('Deploy to Test Environment') {
+        stage('Deploy Application') {
             steps {
-                echo 'Deploying application to testing server...'
-                echo 'Configuring runtime environment...'
+                echo 'Deploying application to test environment...'
                 echo 'Deployment completed successfully...'
             }
         }
 
-        stage('Post Deployment Validation') {
+        stage('Post Deployment Verification') {
             steps {
-                echo 'Performing application health checks...'
-                echo 'Validating deployment status...'
-                echo 'System verification successful...'
-            }
-        }
-
-        stage('Notification Service') {
-            steps {
-                echo 'Sending build notifications...'
-                echo 'Updating CI dashboard status...'
-                echo 'Notification service completed...'
+                echo 'Performing health checks...'
+                echo 'Deployment verification successful...'
             }
         }
     }
@@ -120,7 +97,6 @@ pipeline {
             echo "=========================================="
             echo "BUILD STATUS : SUCCESS"
             echo "Continuous Integration Pipeline Completed"
-            echo "Application deployed successfully"
             echo "=========================================="
         }
 
@@ -128,7 +104,6 @@ pipeline {
             echo "=========================================="
             echo "BUILD STATUS : FAILURE"
             echo "Pipeline execution failed"
-            echo "Check logs for detailed error analysis"
             echo "=========================================="
         }
 

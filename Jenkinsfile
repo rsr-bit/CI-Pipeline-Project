@@ -2,83 +2,114 @@ pipeline {
 
     agent any
 
+    tools {
+        jdk 'JDK'
+    }
+
     environment {
-        APP_NAME = "CI-Pipeline-Project"
-        BUILD_VERSION = "1.0.${BUILD_NUMBER}"
+        PROJECT_NAME = "Enterprise-CI-System"
+        ENVIRONMENT = "Testing"
+        BUILD_STATUS = "STARTED"
     }
 
     stages {
 
-        stage('Initialize') {
+        stage('Initialize Pipeline') {
             steps {
-                echo '===================================='
-                echo "Initializing ${APP_NAME}"
-                echo "Build Version: ${BUILD_VERSION}"
-                echo '===================================='
+                echo "=========================================="
+                echo "Starting Continuous Integration Pipeline"
+                echo "Project: ${PROJECT_NAME}"
+                echo "Environment: ${ENVIRONMENT}"
+                echo "Build Number: ${BUILD_NUMBER}"
+                echo "=========================================="
             }
         }
 
-        stage('Checkout Source Code') {
+        stage('Source Code Management') {
             steps {
                 echo 'Connecting to GitHub Repository...'
                 echo 'Fetching latest source code...'
+                echo 'Repository synchronization completed...'
             }
         }
 
-        stage('Build Application') {
+        stage('Dependency Validation') {
             steps {
-                echo 'Compiling source files...'
-                echo 'Resolving dependencies...'
-                echo 'Generating application build...'
+                echo 'Checking project dependencies...'
+                echo 'Resolving external libraries...'
+                echo 'Dependency verification completed...'
             }
         }
 
-        stage('Static Code Analysis') {
+        stage('Compile Application') {
             steps {
-                echo 'Running code quality checks...'
-                echo 'Analyzing coding standards...'
+                echo 'Compiling Java source files...'
+                echo 'Generating binary artifacts...'
+                echo 'Compilation completed successfully...'
+            }
+        }
+
+        stage('Code Quality Analysis') {
+            steps {
+                echo 'Running static code analysis...'
+                echo 'Checking coding standards...'
+                echo 'Code quality verification completed...'
             }
         }
 
         stage('Unit Testing') {
             steps {
                 echo 'Executing unit test cases...'
-                echo 'Validating application modules...'
+                echo 'Generating test reports...'
+                echo 'Unit testing completed successfully...'
             }
         }
 
         stage('Integration Testing') {
             steps {
-                echo 'Performing integration testing...'
-                echo 'Checking service interactions...'
+                echo 'Running integration testing...'
+                echo 'Validating module communication...'
+                echo 'Integration testing completed...'
             }
         }
 
-        stage('Security Scan') {
+        stage('Security and Vulnerability Scan') {
             steps {
-                echo 'Performing security vulnerability scan...'
-                echo 'Checking application security policies...'
+                echo 'Performing security analysis...'
+                echo 'Scanning for vulnerabilities...'
+                echo 'Security validation completed...'
             }
         }
 
-        stage('Package Application') {
+        stage('Package Build Artifacts') {
             steps {
-                echo 'Packaging application artifacts...'
-                echo 'Preparing deployment package...'
+                echo 'Packaging application files...'
+                echo 'Creating deployment artifacts...'
+                echo 'Artifact packaging completed...'
             }
         }
 
-        stage('Deploy Application') {
+        stage('Deploy to Test Environment') {
             steps {
-                echo 'Deploying application to test environment...'
+                echo 'Deploying application to testing server...'
+                echo 'Configuring runtime environment...'
                 echo 'Deployment completed successfully...'
             }
         }
 
-        stage('Post Deployment Verification') {
+        stage('Post Deployment Validation') {
             steps {
-                echo 'Running post-deployment checks...'
-                echo 'Application health verified...'
+                echo 'Performing application health checks...'
+                echo 'Validating deployment status...'
+                echo 'System verification successful...'
+            }
+        }
+
+        stage('Notification Service') {
+            steps {
+                echo 'Sending build notifications...'
+                echo 'Updating CI dashboard status...'
+                echo 'Notification service completed...'
             }
         }
     }
@@ -86,21 +117,23 @@ pipeline {
     post {
 
         success {
-            echo '===================================='
-            echo 'CI Pipeline Executed Successfully'
-            echo 'Build Status: SUCCESS'
-            echo '===================================='
+            echo "=========================================="
+            echo "BUILD STATUS : SUCCESS"
+            echo "Continuous Integration Pipeline Completed"
+            echo "Application deployed successfully"
+            echo "=========================================="
         }
 
         failure {
-            echo '===================================='
-            echo 'CI Pipeline Failed'
-            echo 'Build Status: FAILURE'
-            echo '===================================='
+            echo "=========================================="
+            echo "BUILD STATUS : FAILURE"
+            echo "Pipeline execution failed"
+            echo "Check logs for detailed error analysis"
+            echo "=========================================="
         }
 
         always {
-            echo 'Pipeline Execution Completed'
+            echo "CI Pipeline Execution Finished"
         }
     }
 }
